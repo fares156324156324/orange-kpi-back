@@ -12,8 +12,8 @@ pipeline {
         }
         stage('Build'){
             steps{
-                sh 'cd target '
-                sh 'java -jar -Dserver.port=8090 demo-0.0.1-SNAPSHOT.jar'
+            
+                sh 'java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar'
             }
 
         }
