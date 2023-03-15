@@ -12,16 +12,10 @@ pipeline {
         }
         stage('Build'){
             steps{
-            
-                sh 'java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar'
+                sh'mvn clean package -DskipTests=true'
+                archivve'java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar'
             }
         }
-        stage ('test'){
-            steps {
-                sh'echo tesssssssssssssssst'
-
-        }
-
-        }
+        
         }
    }
