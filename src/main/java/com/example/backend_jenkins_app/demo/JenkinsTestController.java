@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class JenkinsTestController {
-    @RequestMapping("/hello")
+    @RequestMapping("/")
  public String index()
  {
     return "Testing spring boot testttttttt jenkins pipeline";
