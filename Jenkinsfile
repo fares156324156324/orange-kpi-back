@@ -15,7 +15,8 @@ pipeline {
         
         stage("Maven Start"){
             steps {
-                sh "java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar"
+                sh''
+                sh "java -jar target/demo-0.0.1-SNAPSHOT.jar"
                 
             }
         }
