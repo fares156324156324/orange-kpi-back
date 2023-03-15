@@ -5,17 +5,33 @@ pipeline {
     } 
     stages {
         
-        stage('Clean') {
+         stage('Maven Package'){
             steps {
-                sh 'mvn clean package'
-            }
-        }
-        stage('Build'){
-            steps{
-                sh'mvn clean package -DskipTests=true'
-                archivve'java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar'
+                sh " mvn -version "
+                sh " java -version "
+                sh " mvn package -e "
             }
         }
         
+        stage("Maven Clean"){
+            steps {
+                sh " mvn clean -e "
+                
+            }
+        }
+
+         stage("Maven Compile"){
+            steps {
+                sh " mvn compile -e "
+                
+            }
+        }
+
+        stage("Maven Install"){
+            steps {
+                sh " mvn install "
+                
+            }
+        }
         }
    }
