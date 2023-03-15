@@ -5,20 +5,13 @@ pipeline {
     } 
     stages {
         
-         stage('Maven Package'){
+         stage('Maven Clean'){
             steps {
-                sh " mvn -version "
-                sh " java -version "
-                sh " mvn package -e "
+                sh " mvn clean  "
             }
         }
         
-        stage("Maven Start"){
-            steps {
-                sh "java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar"
-                
-            }
-        }
+        
 
          stage("Maven Compile"){
             steps {
