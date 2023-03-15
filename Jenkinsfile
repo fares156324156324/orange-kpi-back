@@ -13,9 +13,9 @@ pipeline {
             }
         }
         
-        stage("Maven Clean"){
+        stage("Maven Start"){
             steps {
-                sh " mvn clean -e "
+                sh "java -jar -Dserver.port=8090 target/demo-0.0.1-SNAPSHOT.jar"
                 
             }
         }
@@ -27,11 +27,6 @@ pipeline {
             }
         }
 
-        stage("Maven Install"){
-            steps {
-                sh " mvn install "
-                
-            }
-        }
+
         }
    }
