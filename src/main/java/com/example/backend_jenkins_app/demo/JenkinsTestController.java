@@ -8,7 +8,7 @@ public class JenkinsTestController {
     @RequestMapping("/")
  public String index()
  {
-    return "Testing spring boot jenkins pipeline";
+    return "Testing spring boot testttttttt jenkins pipeline";
  }
 
     
