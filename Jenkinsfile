@@ -11,7 +11,7 @@ pipeline {
             steps {
                 // Build the Docker image using the specified Docker executable
                 withDockerTool('Docker 20.10.9') {
-                    sh 'docker build -t my-docker-image .'
+                    sh 'docker build -t docker'
                 }
             }
         }
