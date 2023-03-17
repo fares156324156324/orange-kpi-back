@@ -3,12 +3,12 @@ pipeline {
      tools { 
         maven 'maven-3.6.3'
     } 
-  
+
     stages {
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
-        archiveArtifacts artifacts: '/target/SpringbBoot_Jenkins_test.jar', fingerprint: true
+        archiveArtifacts artifacts: 'SpringbBoot_Jenkins_test/target.jar', fingerprint: true
       }
     }
     
