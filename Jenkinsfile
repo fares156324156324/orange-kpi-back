@@ -14,6 +14,7 @@ pipeline {
                     sh 'docker build -t my-docker-image .'
                 }
             }
+        }
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
