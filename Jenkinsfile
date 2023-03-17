@@ -8,7 +8,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
-        archiveArtifacts artifacts: 'SpringbBoot_Jenkins_test/target.jar', fingerprint: true
+        archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
     
