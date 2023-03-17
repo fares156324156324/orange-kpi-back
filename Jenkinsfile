@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image using the specified Docker executable
-                withDockerTool('Docker 20.10.9') {
+                withDockerTool('docker') {
                     sh 'docker build -t docker'
                 }
             }
