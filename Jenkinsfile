@@ -1,7 +1,7 @@
 pipeline {
     agent any
      tools { 
-        dockerTool 'Docker 20.10.9'
+        docker 'Docker 20.10.9'
         maven 'maven-3.6.3'
     } 
 
