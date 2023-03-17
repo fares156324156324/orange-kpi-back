@@ -19,9 +19,9 @@ pipeline {
     
     stage('Dockerize') {
       steps {
-        sh'sudo usermod -aG docker jenkins'
-        sh 'sudo docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
-        sh 'sudo docker push fares123456/springbootapp:${BUILD_NUMBER}'
+        sh'usermod -aG docker jenkins'
+        sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
+        sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
       }
     }
     
