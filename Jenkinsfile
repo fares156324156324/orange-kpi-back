@@ -13,7 +13,7 @@ pipeline {
                     sh 'docker build docker-20.10.9'
                 }
             }
-        }
+        
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
