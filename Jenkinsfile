@@ -1,7 +1,7 @@
 pipeline {
     agent any
      tools { 
-        dockerTool 'docker'
+        dockerTool 'docker-20.10.9'
         maven 'maven-3.6.3'
     } 
 
@@ -10,8 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image using the specified Docker executable
-                withDockerTool('docker') {
-                    sh 'docker build '
+                    sh 'docker build docker-20.10.9'
                 }
             }
         }
