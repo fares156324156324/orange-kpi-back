@@ -1,11 +1,14 @@
 pipeline {
     agent any
      tools { 
-        dockerTool 'docker'
+        dockerTool 'docker-20.10.9'
         maven 'maven-3.6.3'
     } 
 
-   
+    stages {
+
+      
+            
         
     stage('Build') {
       steps {
@@ -33,4 +36,5 @@ pipeline {
       cleanWs()
     }
   }
+
 }
