@@ -10,7 +10,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 // Build the Docker image using the specified Docker executable
-                    sh 'docker build docker-20.10.9'
+                    sh 'docker build docker-20.10.9 .'
                 }
             }
         
