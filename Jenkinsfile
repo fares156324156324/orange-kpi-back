@@ -4,14 +4,16 @@ pipeline {
         dockerTool 'Docker 20.10.9'
         maven 'maven-3.6.3'
     } 
-stage('Build Docker Image') {
+
+    stages {
+
+        stage('Build Docker Image') {
             steps {
                 // Build the Docker image using the specified Docker executable
                 withDockerTool('Docker 20.10.9') {
                     sh 'docker build -t my-docker-image .'
                 }
             }
-    stages {
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
