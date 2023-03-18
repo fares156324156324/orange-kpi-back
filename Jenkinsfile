@@ -22,21 +22,20 @@ pipeline {
 
 
     
-    stage ('Login'){
-        steps{
-        script {
-        docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
-  }
-}
-        }
+        
 
     }
     stage('Dockerize') {
       steps {
+        steps{
+        script {
+        docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
+  
         sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
         sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
       }
     }
+        }
     
     stage('Deploy') {
       steps {
