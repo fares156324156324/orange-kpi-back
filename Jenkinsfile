@@ -6,6 +6,8 @@ pipeline {
      }
     environment {
        DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
+        DOCKER_IMAGE_NAME = 'fares123456/springbootapp'
+        DOCKER_IMAGE_TAG = 'latest'
     
     }
     
@@ -23,10 +25,9 @@ pipeline {
     stage('Dockerize') {
       steps {
         script {
-        docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
-  
-        def image = docker.build('fares123456/springbootapp:latest', '.')
-            image.push()
+        docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
+            def dockerImage = docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}", ".")
+            dockerImage.push()
       }
     }
       }
