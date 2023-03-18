@@ -51,6 +51,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				<image>
+				<name>
+				fares123456/${project.artifactId}
+				</name>
+				</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
