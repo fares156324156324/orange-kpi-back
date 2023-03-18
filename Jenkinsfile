@@ -12,19 +12,23 @@ pipeline {
     
     stages {
 
-      
-            
-        
+                    
     stage('Build') {
       steps {
         sh 'mvn clean package -DskipTests=true'
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
+
+
+    
     stage ('Login'){
         steps{
-
-            sh'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+    withCredentials([usernamePassword(credentialsId: 'fares_Docker_hub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+    withEnv(['DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME', 'DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD', 'DOCKERHUB_TOKEN=dckr_pat_PftfNApFEtAaFB64QFQV2KtX1sY']) {
+         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD -e none https://index.docker.io/v1/"
+  }
+}
         }
 
     }
