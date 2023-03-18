@@ -24,9 +24,13 @@ pipeline {
     
     stage ('Login'){
         steps{
-    withCredentials([usernamePassword(credentialsId: 'fares_Docker_hub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-    withEnv(['DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME', 'DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD', 'DOCKERHUB_TOKEN=dckr_pat_PftfNApFEtAaFB64QFQV2KtX1sY']) {
-         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD -e none https://index.docker.io/v1/"
+    withCredentials([usernamePassword(credentialsId: 'fares_Docker_hub', 
+    passwordVariable: 'DOCKERHUB_PASSWORD', 
+    usernameVariable: 'DOCKERHUB_USERNAME')]) {
+    withEnv(['DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME',
+     'DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD', 
+     'DOCKERHUB_TOKEN=dckr_pat_PftfNApFEtAaFB64QFQV2KtX1sY']) {
+         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD "
   }
 }
         }
