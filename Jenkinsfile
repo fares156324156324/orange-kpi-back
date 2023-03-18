@@ -3,10 +3,10 @@ pipeline {
      tools { 
         dockerTool 'docker'
         maven 'maven-3.6.3'
-        environment {
-        DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
+ environment {
+  }        DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
     }
-    } 
+    
     
     stages {
 
