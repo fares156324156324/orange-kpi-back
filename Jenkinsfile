@@ -20,14 +20,8 @@ pipeline {
       }
     }
 
-
-    
-        
-
-    }
     stage('Dockerize') {
       steps {
-        steps{
         script {
         docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
   
@@ -35,6 +29,7 @@ pipeline {
         sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
       }
     }
+      }
         }
     
     stage('Deploy') {
@@ -43,6 +38,7 @@ pipeline {
       }
     }
   }
+    }
   
   post {
     always {
