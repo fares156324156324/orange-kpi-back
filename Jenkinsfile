@@ -30,7 +30,7 @@ pipeline {
     withEnv(['DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME',
      'DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD', 
      'DOCKERHUB_TOKEN=dckr_pat_PftfNApFEtAaFB64QFQV2KtX1sY']) {
-        sh'echo ${DOCKERHUB_USERNAME}'
+        sh'echo $DOCKERHUB_USERNAME'
         sh'echo ${DOCKERHUB_PASSWORD}'
          sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD "
   }
