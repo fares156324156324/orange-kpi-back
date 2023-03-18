@@ -24,15 +24,8 @@ pipeline {
     
     stage ('Login'){
         steps{
-    withCredentials([usernamePassword(credentialsId: 'fares_Docker_hub', 
-    passwordVariable: 'DOCKERHUB_PASSWORD', 
-    usernameVariable: 'DOCKERHUB_USERNAME')]) {
-    withEnv(['DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME',
-     'DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD', 
-     'DOCKERHUB_TOKEN=dckr_pat_PftfNApFEtAaFB64QFQV2KtX1sY']) {
-        sh'echo $DOCKERHUB_USERNAME'
-        sh'echo ${DOCKERHUB_PASSWORD}'
-         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD "
+        script {
+        docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
   }
 }
         }
