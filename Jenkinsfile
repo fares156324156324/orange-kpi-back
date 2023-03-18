@@ -40,6 +40,7 @@ withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd
     
     stage('Deploy') {
       steps {
+        sh 'export PATH=$PATH:/usr/local/bin/docker-compose'
         sh 'docker-compose -f docker-compose.yml up -d'
       }
     }
