@@ -4,10 +4,6 @@ pipeline {
         dockerTool 'docker'
         maven 'maven-3.6.3'
      }
-    environment {
-       DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
-    
-    }
     
     
     stages {
@@ -30,7 +26,8 @@ pipeline {
         steps{
             script{
 withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd')]) {
-}         sh 'docker login -u fares123456 -p ${dockerpwd} '
+       sh 'docker login -u fares123456 -p ${dockerpwd} '
+    }
   }}
 }
  stage('Push image') {
@@ -38,15 +35,8 @@ withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd
         sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
       }
     }
-        }
-
-    }
-    stage('Dockerize') {
-      steps {
-        sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
-        sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
-      }
-    }
+        
+    
     
     stage('Deploy') {
       steps {
