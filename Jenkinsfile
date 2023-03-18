@@ -25,8 +25,8 @@ pipeline {
         script {
         docker.withRegistry('https://registry.hub.docker.com', 'fares_Docker_hub') {
   
-        sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
-        sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
+        def image = docker.build('fares123456/my-image:latest', '.')
+            image.push()
       }
     }
       }
