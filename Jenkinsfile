@@ -3,10 +3,11 @@ pipeline {
      tools { 
         dockerTool 'docker'
         maven 'maven-3.6.3'
-    } 
-    environmet {
+        environmet {
         DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
     }
+    } 
+    
     stages {
 
       
