@@ -4,7 +4,9 @@ pipeline {
         dockerTool 'docker'
         maven 'maven-3.6.3'
     } 
-
+    environement {
+        DOCKERHUB_CREDENTIALS = credentials('fares_Docker_hub')
+    }
     stages {
 
       
@@ -16,7 +18,13 @@ pipeline {
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
-    
+    stage ('Login'){
+        steps{
+
+            sh'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password -stdin'
+        }
+
+    }
     stage('Dockerize') {
       steps {
         sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
@@ -33,6 +41,7 @@ pipeline {
   
   post {
     always {
+        sh'docker logout'
       cleanWs()
     }
   }
