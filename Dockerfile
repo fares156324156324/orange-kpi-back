@@ -6,4 +6,4 @@ COPY target/*.jar .
 
 EXPOSE 8099
 
-CMD ["java", "-jar", "SpringBoot_Jenkins_test.jar"]
+CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
