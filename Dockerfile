@@ -6,4 +6,4 @@ COPY target/*.jar app.jar
 
 EXPOSE 8099
 
-CMD ["java", "-jar", "app.jar"]
+CMD ["ls"]
