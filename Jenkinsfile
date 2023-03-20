@@ -10,14 +10,14 @@ pipeline {
                     
     stage('Clean') {
       steps {
-        sh 'mvn clean compile package -DskipTests=true'
+        sh 'mvn clean -DskipTests=true'
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
 
  stage('Build image') {
       steps {
-        sh ' docker build -t fares123456/springbootapp:latest} .'
+        sh ' docker build -t fares123456/springbootapp:latest .'
       }
     }
     
@@ -31,7 +31,7 @@ withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd
 }
  stage('Push image') {
       steps {
-        sh ' docker push fares123456/springbootapp:latest}'
+        sh ' docker push fares123456/springbootapp:latest'
       }
     }
         
