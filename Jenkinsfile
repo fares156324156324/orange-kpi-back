@@ -12,7 +12,6 @@ pipeline {
       steps {
         sh 'mvn clean -DskipTests=true'
         sh 'mvn compile '
-        sh 'mvn build --prod'
         archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
       }
     }
