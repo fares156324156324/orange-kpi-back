@@ -1,9 +1,7 @@
 FROM openjdk:11-jdk-slim
 
-WORKDIR /home/fares/Desktop/SpringBoot_Jenkins_test
-
-COPY target/*.jar app.jar
-
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} /home/fares/Desktop/SpringBoot_Jenkins_test/app.jar
+ENTRYPOINT ["java","-jar","/home/fares/Desktop/SpringBoot_Jenkins_test/app.jar"]
 EXPOSE 8099
 
-CMD ["ls"]
