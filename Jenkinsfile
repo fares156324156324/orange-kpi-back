@@ -10,8 +10,7 @@ pipeline {
                     
     stage('Clean') {
       steps {
-        sh 'mvn clean -DskipTests=true'
-        sh 'mvn compile '
+        sh 'mvn clean install -DskipTests=true'
     archive'target/*.jar'
       }
     }
