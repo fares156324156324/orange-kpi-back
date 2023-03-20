@@ -17,7 +17,7 @@ pipeline {
 
  stage('Build image') {
       steps {
-        sh ' docker build -t fares123456/springbootapp:${BUILD_NUMBER} .'
+        sh ' docker build -t fares123456/springbootapp:latest} .'
       }
     }
     
@@ -31,7 +31,7 @@ withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd
 }
  stage('Push image') {
       steps {
-        sh ' docker push fares123456/springbootapp:${BUILD_NUMBER}'
+        sh ' docker push fares123456/springbootapp:latest}'
       }
     }
         
