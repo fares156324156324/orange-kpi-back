@@ -4,6 +4,4 @@ WORKDIR /home/fares/Desktop/SpringBoot_Jenkins_test
 
 COPY target/*.jar app.jar
 
-EXPOSE 8099
-
 CMD ["java", "-jar", "app.jar"]
