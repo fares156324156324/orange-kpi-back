@@ -26,7 +26,7 @@ public class Application {
 	}
 	@GetMapping
 	public List<User> getUsers(){
-		return repo.findAll();
+	return null;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
