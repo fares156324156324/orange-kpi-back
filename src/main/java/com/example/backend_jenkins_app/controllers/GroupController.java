@@ -13,14 +13,11 @@ import com.example.backend_jenkins_app.services.GroupService;
 @RequestMapping("/group")
 public class GroupController {
 
-   @Autowired
+    @Autowired
     private GroupService groupservice;
 
-
-
     @GetMapping("/getAll")
-    public List<Group> getAllUsers()
-    {
+    public List<Group> getAllUsers() {
         return groupservice.getAllGroups();
 
     }
@@ -39,10 +36,8 @@ public class GroupController {
         groupservice.AddGroup(group);
     }
 
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteGroup(@PathVariable int id) 
-    {
+    @DeleteMapping("/delet/{id}")
+    public void deleteGroup(@PathVariable int id) {
         groupservice.DeleteGroup(id);
     }
 
