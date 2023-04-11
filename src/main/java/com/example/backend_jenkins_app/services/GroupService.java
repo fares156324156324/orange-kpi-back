@@ -1,7 +1,6 @@
 package com.example.backend_jenkins_app.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -12,7 +11,7 @@ import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 
 @Service
-public class GroupService implements IGroupService{
+public class GroupService implements IGroupService {
     @Autowired
     private GroupRepository groupRepository;
 
@@ -24,22 +23,20 @@ public class GroupService implements IGroupService{
 
     @Override
     public List<Group> getAllGroups() {
-        return (List<Group>) groupRepository.findAll();
+        return groupRepository.findAll();
 
     }
 
     @Override
     public Group getGroupById(int id) {
         return groupRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("group not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("group not found with id " + id));
 
-    
-}
+    }
 
     @Override
     public void DeleteGroup(int id) {
-		groupRepository.deleteById(id);
+        groupRepository.deleteById(id);
     }
-    
 
-    }
+}

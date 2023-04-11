@@ -6,7 +6,7 @@ services:
     ports:
       - 27017:27017
   Spring:
-    image: fares123456/springbootapp
+    image: fares123456/springbootapp:latest
     container_name: fares123456/springbootapp
     ports:
       - 8089:8089

@@ -1,11 +1,9 @@
 package com.example.backend_jenkins_app.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.example.backend_jenkins_app.models.Group;
 
-@Repository
-public interface GroupRepository extends CrudRepository<Group, Integer> {
-    
+public interface GroupRepository extends MongoRepository<Group, Integer> {
+
 }

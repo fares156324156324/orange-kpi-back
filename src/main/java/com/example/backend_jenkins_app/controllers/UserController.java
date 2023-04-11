@@ -1,6 +1,5 @@
 package com.example.backend_jenkins_app.controllers;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +12,12 @@ import com.example.backend_jenkins_app.services.UserService;
 @RestController
 @RequestMapping("/user")
 public class UserController {
-    
+
     @Autowired
     private UserService userService;
 
-
-
     @GetMapping("/getAll")
-    public List<User> getAllUsers()
-    {
+    public List<User> getAllUsers() {
         return userService.getAllUsers();
 
     }
@@ -37,13 +33,11 @@ public class UserController {
 
     @PostMapping
     public void createUser(@RequestBody User user) {
-         userService.AddUser(user);
+        userService.AddUser(user);
     }
 
-
     @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable int id)
-    {
+    public void deleteUser(@PathVariable int id) {
         userService.DeleteUser(id);
     }
 }

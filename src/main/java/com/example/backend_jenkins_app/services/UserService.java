@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class UserService  implements IUserService{
+public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -31,7 +31,7 @@ public class UserService  implements IUserService{
     @Override
     public User getUserById(int id) {
         return userRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("user not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("user not found with id " + id));
 
     }
 
@@ -40,7 +40,5 @@ public class UserService  implements IUserService{
         userRepository.deleteById(id);
 
     }
-    
-	
-    
+
 }
