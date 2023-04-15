@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class UserService implements IUserService {
-    @Autowired
+    @Autowired(required = true)
     private UserRepository userRepository;
 
     @Override
