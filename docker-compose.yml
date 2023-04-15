@@ -3,12 +3,10 @@ services:
   springdb:
     image: mongo:latest
     container_name: "springdb"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=user
-      - MONGO_INITDB_ROOT_PASSWORD=password
-      - MONGO_INITDB_DATABASE=Projectdb
     ports:
       - 27017:27017
+    networks:
+      - default
       
   Spring:
     image: fares123456/springbootapp:latest
@@ -17,5 +15,9 @@ services:
       - 8089:8089
     links: 
       - springdb
+    depends_on:
+      - springdb  
+    networks:
+      - default
 
   
