@@ -2,7 +2,7 @@ version: "3"
 services:
   springdb:
     image: mongo:latest
-    container_name: "springdb"
+    container_name: "springdbb"
     ports:
       - 27017:27017
     networks:
