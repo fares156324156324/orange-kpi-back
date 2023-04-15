@@ -18,7 +18,7 @@ services:
     image: fares123456/springbootapp:latest
     container_name: springbootapp
     ports:
-      - 8099:8080
+      - 8080:8099
     links: 
       - springdb
     depends_on:
