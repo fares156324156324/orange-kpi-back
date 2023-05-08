@@ -24,7 +24,6 @@ public class GroupService implements IGroupService {
     @Override
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
-
     }
 
     @Override
@@ -38,5 +37,4 @@ public class GroupService implements IGroupService {
     public void DeleteGroup(int id) {
         groupRepository.deleteById(id);
     }
-
 }
