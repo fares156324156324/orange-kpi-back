@@ -47,7 +47,7 @@ withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd
   
   post {
     always {
-        sh'docker logout !' 
+        sh'docker logout'
       cleanWs()
     }
   }
