@@ -8,7 +8,7 @@ pipeline {
     stages {
 
                     
-    stage('Clean install') {
+    stage('Clean') {
       steps {
         sh 'mvn clean install -DskipTests=true'
     archive'target/*.jar'
