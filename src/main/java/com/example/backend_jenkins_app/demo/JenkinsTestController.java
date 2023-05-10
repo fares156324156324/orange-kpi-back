@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class JenkinsTestController {
    @RequestMapping("/")
    public String index() {
-      return "dqsqsd appp";
+      return " appp";
    }
 
 }
