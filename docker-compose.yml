@@ -28,5 +28,8 @@ services:
       
     networks:
       - default
+    
+volumes:
+  mongo-data:
 
   
