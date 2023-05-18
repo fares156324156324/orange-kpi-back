@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 
 public class JenkinsTestController {
-   @RequestMapping("/")
+   @RequestMapping("/test")
    public String index() {
       return " appp";
    }
