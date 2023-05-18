@@ -23,6 +23,8 @@ services:
       - springdb
     depends_on:
       - springdb  
+    volumes: 
+      - mongo-data:/data/db
       
     networks:
       - default

@@ -36,7 +36,7 @@ public class GroupController {
         groupservice.AddGroup(group);
     }
 
-    @DeleteMapping("/delet/{id}")
+    @DeleteMapping("/delet²/{id}")
     public void deleteGroup(@PathVariable int id) {
         groupservice.DeleteGroup(id);
     }
