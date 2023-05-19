@@ -20,7 +20,22 @@ import com.example.backend_jenkins_app.repositories.UserRepository;
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class })
 @EnableMongoRepositories(basePackageClasses = { UserRepository.class, GroupRepository.class })
 
+@RestController
+@RequestMapping("/user")
+
 public class Application {
+	@Autowired
+	private UserRepository repo;
+
+	public User saveuser(@RequestBody User user) {
+		return repo.save(user);
+
+	}
+
+	@GetMapping
+	public List<User> getUsers() {
+		return null;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
