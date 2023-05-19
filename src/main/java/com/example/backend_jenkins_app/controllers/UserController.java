@@ -10,7 +10,7 @@ import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.services.UserService;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
