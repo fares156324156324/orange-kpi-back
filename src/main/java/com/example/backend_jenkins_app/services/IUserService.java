@@ -6,12 +6,13 @@ import com.example.backend_jenkins_app.models.User;
 
 public interface IUserService {
 
-    public User AddUser(User user);
+    User addUser(User user);
 
-    public List<User> getAllUsers();
+    User getUserById(int id);
 
-    public User getUserById(int id);
+    List<User> getAllUsers();
 
-    public void DeleteUser(int id);
+    User updateUser(User user);
 
+    void deleteUser(int id);
 }

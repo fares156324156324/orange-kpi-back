@@ -1,4 +1,4 @@
-package com.example.backend_jenkins_app.demo;
+package com.example.backend_jenkins_app.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

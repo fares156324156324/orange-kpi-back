@@ -1,43 +1,41 @@
 package com.example.backend_jenkins_app.controllers;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_jenkins_app.models.User;
-import com.example.backend_jenkins_app.services.UserService;
+import com.example.backend_jenkins_app.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
-    private UserService userService;
-
-    @GetMapping("/getAll")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-
-    }
-
-    @GetMapping("/getuser/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") int id) {
-        User user = userService.getUserById(id);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(user);
-    }
+    private IUserService userService;
 
     @PostMapping
-    public void createUser(@RequestBody User user) {
-        userService.AddUser(user);
+    public User createUser(@RequestBody User user) {
+        return userService.addUser(user);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/{id}")
+    public User getUserById(@PathVariable int id) {
+        return userService.getUserById(id);
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
+    @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable int id) {
-        userService.DeleteUser(id);
+        userService.deleteUser(id);
     }
 }
