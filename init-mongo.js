@@ -1,7 +1,7 @@
 db.createUser(
     {
-        user: "mongodb",
-        pwd: "mongodb",
+        user: "fares",
+        pwd: "fares",
         roles: [
             {
                 role: "readWrite",
