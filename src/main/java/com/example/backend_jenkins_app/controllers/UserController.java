@@ -17,6 +17,7 @@ import com.example.backend_jenkins_app.services.IUserService;
 @RequestMapping("/users")
 public class UserController {
     @Autowired
+
     private IUserService userService;
 
     @PostMapping

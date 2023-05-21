@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.backend_jenkins_app.repositories.UserRepository;
 
+@ComponentScan("com.example.backend_jenkins_app.services")
 @ComponentScan("com.example.backend_jenkins_app.controllers")
+@ComponentScan("com.example.backend_jenkins_app.repositories")
+
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class })
 @EnableMongoRepositories(basePackageClasses = { UserRepository.class, GroupRepository.class })
 
