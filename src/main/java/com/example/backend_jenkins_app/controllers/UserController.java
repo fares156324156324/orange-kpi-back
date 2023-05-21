@@ -29,7 +29,8 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping
+    @GetMapping("/getAll")
+
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }

@@ -16,29 +16,23 @@ public class GroupController {
     @Autowired
     private GroupService groupservice;
 
-    @GetMapping("/getAll")
-    public List<Group> getAllUsers() {
-        return groupservice.getAllGroups();
-
-    }
-
-    @GetMapping("/getuser/{id}")
-    public ResponseEntity<Group> getGroupById(@PathVariable("id") int id) {
-        Group group = groupservice.getGroupById(id);
-        if (group == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(group);
-    }
-
     @PostMapping
-    public void createGroup(@RequestBody Group group) {
-        groupservice.AddGroup(group);
+    public Group creategroup(@RequestBody Group group) {
+        return groupservice.addGroup(group);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteGroup(@PathVariable int id) {
-        groupservice.DeleteGroup(id);
+    @GetMapping("/getAll")
+    public List<Group> getAllgroups() {
+        return groupservice.getAllGroups();
     }
 
+    @GetMapping("/{id}")
+    public Group getgroupById(@PathVariable int id) {
+        return groupservice.getGroupById(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletegroup(@PathVariable int id) {
+        groupservice.deleteGroup(id);
+    }
 }

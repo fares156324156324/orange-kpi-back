@@ -16,9 +16,13 @@ public class GroupService implements IGroupService {
     private GroupRepository groupRepository;
 
     @Override
-    public Group AddGroup(Group group) {
+    public Group addGroup(Group group) {
         return groupRepository.save(group);
+    }
 
+    @Override
+    public Group getGroupById(int id) {
+        return groupRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -27,14 +31,15 @@ public class GroupService implements IGroupService {
     }
 
     @Override
-    public Group getGroupById(int id) {
-        return groupRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("group not found with id " + id));
+    public Group updateGroup(Group group) {
+        return groupRepository.save(group);
 
     }
 
     @Override
-    public void DeleteGroup(int id) {
+    public void deleteGroup(int id) {
         groupRepository.deleteById(id);
+
     }
+
 }
