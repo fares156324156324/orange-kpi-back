@@ -9,7 +9,7 @@ public class JenkinsTestController {
    @RequestMapping("/test")
    public String index() {
 
-      return " Testtttttttttt pt ";
+      return " Testtttttt pt ";
    }
 
 }
