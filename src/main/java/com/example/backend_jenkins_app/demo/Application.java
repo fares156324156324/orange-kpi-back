@@ -26,10 +26,4 @@ public class Application {
 
 	}
 
-	@RequestMapping("/test")
-	public String index() {
-
-		return " Testtttttttttt pt ";
-
-	}
 }
