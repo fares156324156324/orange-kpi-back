@@ -10,4 +10,4 @@ db.createUser(
         ]
     }
 );
-db.createCollection("Projectdb"); //MongoDB creates the database when you first store data in that database
+db.createCollection("Projectdb"); 
