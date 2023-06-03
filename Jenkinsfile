@@ -21,13 +21,14 @@ pipeline {
       }
     }
     
-    stage ('Login'){
-        steps{
-            script{
-withCredentials([string(credentialsId: 'DOCKERHUB_JENKINS', variable: 'dockerpwd')]) {
-       sh 'docker login -u fares123456 -p ${dockerpwd} '
+   stage('Login') {
+    steps {
+        withCredentials(usernamePassword(credentialsId: 'DOCKERHUB_JENKINS', usernameVariable: 'dockerUser', passwordVariable: 'dockerPwd')) {
+            sh 'docker login -u $dockerUser -p $dockerPwd'
+        }
     }
-  }}
+}
+
 }
  stage('Push image') {
       steps {
