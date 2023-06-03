@@ -29,7 +29,7 @@ pipeline {
     }
 }
 
-}
+
  stage('Push image') {
       steps {
         sh ' docker push fares123456/springbootapp:latest'
