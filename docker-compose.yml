@@ -10,6 +10,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=fares
       - MONGO_INITDB_ROOT_PASSWORD=fares
+      - MONGO_INITDB_DATABASE=Projectdb
+      - MONGO_INITDB_USER=mongodb
+      - MONGO_INITDB_PWD=mongodb
       
   Spring:
     image: fares123456/springbootapp:latest
