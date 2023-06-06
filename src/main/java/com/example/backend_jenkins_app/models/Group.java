@@ -24,10 +24,22 @@ import lombok.ToString;
 @ToString
 @Document(collection = "groups")
 public class Group {
+    public enum GroupName {
+        SMC,
+        INFRA,
+        B2B,
+        IP,
+        CORE,
+        DRS,
+        ARCHITECTURE_DIMENSIONNEMNT,
+        UAS,
+        INJ
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String name;
+    private GroupName groupname;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
