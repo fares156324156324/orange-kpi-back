@@ -16,6 +16,5 @@ public interface IGroupService {
 
     void deleteGroup(int id);
 
-    void deleteByGroupName(String groupName);
 }
       
