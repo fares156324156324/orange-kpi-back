@@ -11,6 +11,6 @@ import com.example.backend_jenkins_app.models.Group;
 
 public interface GroupRepository extends MongoRepository<Group, Integer> {
     
-    void deleteByGroupname(Group.GroupName groupname);
+    void deleteByGroupName(String groupName);
 
 }

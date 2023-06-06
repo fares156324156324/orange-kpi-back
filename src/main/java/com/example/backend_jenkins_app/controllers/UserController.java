@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_jenkins_app.models.User;
+import com.example.backend_jenkins_app.services.IGroupService;
 import com.example.backend_jenkins_app.services.IUserService;
 
 @RestController
@@ -19,6 +20,7 @@ public class UserController {
     @Autowired
 
     private IUserService userService;
+    private IGroupService groupservice;
 
     @PostMapping
     public User createUser(@RequestBody User user) {

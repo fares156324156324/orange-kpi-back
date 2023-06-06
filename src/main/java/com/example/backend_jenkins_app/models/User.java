@@ -2,6 +2,8 @@ package com.example.backend_jenkins_app.models;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,10 +23,9 @@ import lombok.ToString;
 @Document(collection = "users")
 
 public class User {
-
 	@Id
-	private int userId;
-	private String userName;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int userId;	private String userName;
 	private String email;
 	private String password;
 

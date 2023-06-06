@@ -41,13 +41,16 @@ public class GroupService implements IGroupService {
 
     }
 
-    @Override
+    
 
-    public void deleteGroupByGroupname(Group.GroupName groupname) {
-        groupRepository.deleteByGroupname(groupname);
+    @Override
+    public void deleteByGroupName(String groupName) {
+        groupRepository.deleteByGroupName(groupName);
     }
 
+    
 
+    
 
 
 }

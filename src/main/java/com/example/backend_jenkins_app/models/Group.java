@@ -45,4 +45,8 @@ public class Group {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "group")
     @ToString.Exclude
     private List<User> users;
+
+    public Group(GroupName groupname) {
+        this.groupname = groupname;
+    }
 }
