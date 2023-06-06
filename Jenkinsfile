@@ -17,6 +17,8 @@ pipeline {
 
  stage('Build image') {
       steps {
+        sh 'chown jenkins:docker /var/run/docker.sock'
+        sh'usermod -aG docker jenkins'
         sh ' docker build -t fares123456/springbootapp:latest .'
       }
     }
