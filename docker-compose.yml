@@ -9,8 +9,7 @@ services:
       - default
     volumes:
       - mongo-data:/data/db
-      #- ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-    command: --auth # Enable authentication
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
   Spring:
     image: fares123456/springbootapp:latest
