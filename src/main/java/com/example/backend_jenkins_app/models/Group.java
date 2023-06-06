@@ -37,7 +37,7 @@ public class Group {
 
     @Id
     @Field("id")
-    private String groupId; // Use String type for auto-generated IDs
+    private int id;
 
     private GroupName groupname;
 
