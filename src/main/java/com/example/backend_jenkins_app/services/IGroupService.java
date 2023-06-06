@@ -16,4 +16,6 @@ public interface IGroupService {
 
     void deleteGroup(int id);
 
+    void deleteGroupByGroupname(Group.GroupName groupname);
 }
+      

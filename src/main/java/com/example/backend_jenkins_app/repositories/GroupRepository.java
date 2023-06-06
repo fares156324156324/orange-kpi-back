@@ -10,5 +10,7 @@ import com.example.backend_jenkins_app.models.Group;
 @Repository
 
 public interface GroupRepository extends MongoRepository<Group, Integer> {
+    
+    void deleteByGroupname(Group.GroupName groupname);
 
 }

@@ -3,10 +3,11 @@ package com.example.backend_jenkins_app.models;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,9 +37,8 @@ public class Group {
     }
 
     @Id
-    @Field("id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     private GroupName groupname;
 
     @JsonIgnore
