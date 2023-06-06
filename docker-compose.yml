@@ -7,13 +7,7 @@ services:
       - 27017:27017
     networks:
       - default
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=fares
-      - MONGO_INITDB_ROOT_PASSWORD=fares
-      - MONGO_INITDB_DATABASE=Projectdb
-      - MONGO_INITDB_USER=mongodb
-      - MONGO_INITDB_PWD=mongodb   
-    volumes: 
+    volumes:
       - mongo-data:/data/db
       - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
 
@@ -22,16 +16,12 @@ services:
     container_name: springbootapp
     ports:
       - 8099:8081
-    links: 
+    links:
       - springdb
     depends_on:
-      - springdb  
-    
-      
+      - springdb
     networks:
       - default
-    
+
 volumes:
   mongo-data:
-
-  
