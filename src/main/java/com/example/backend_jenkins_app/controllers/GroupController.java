@@ -35,7 +35,7 @@ public class GroupController {
                     .body("Group with the same name already exists");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An error occurred while processing the request");
+                    .body("Group with the same name already exists");
         }
     } 
     @GetMapping("/getAll")

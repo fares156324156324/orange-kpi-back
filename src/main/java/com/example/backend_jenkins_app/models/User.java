@@ -21,22 +21,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Document(collection = "users")
-
 public class User {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;	private String userName;
-	private String email;
-	private String password;
+    private int userId;
 
-	@Enumerated(EnumType.STRING)
-	private String role;
+    private String userName;
+    private String email;
+    private String password;
 
-	public int getUserId() {
-		return this.userId;
-	}
+    @Enumerated(EnumType.STRING)
+    private String role;
 
-	@ManyToOne
-	private Group group;
-
+    @ManyToOne
+    private Group group;
 }
