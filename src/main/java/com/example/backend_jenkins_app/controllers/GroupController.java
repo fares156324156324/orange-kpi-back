@@ -24,15 +24,18 @@ public class GroupController {
     @Autowired
     private IGroupService groupservice;
 
+    
     @PostMapping
     public ResponseEntity<Object> createGroup(@RequestBody Group group) {
         try {
             Group createdGroup = groupservice.addGroup(group);
             return ResponseEntity.ok(createdGroup);
         } catch (DuplicateKeyException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Group already exists");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Group with the same name already exists");
         }
     }
+    
     @GetMapping("/getAll")
     public List<Group> getAllgroups() {
         return groupservice.getAllGroups();
