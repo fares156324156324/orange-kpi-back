@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,16 +28,16 @@ public class GroupController {
     public ResponseEntity<Object> createGroup(@RequestBody Group group) {
         try {
             Group createdGroup = groupservice.addGroup(group);
-            return ResponseEntity.ok(createdGroup);
-        } catch (DuplicateKeyException e) {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("Group added successfully");
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Group with the same name already exists");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("An error occurred while processing the request");
         }
-    }
-    
+    } 
     @GetMapping("/getAll")
     public List<Group> getAllgroups() {
         return groupservice.getAllGroups();
