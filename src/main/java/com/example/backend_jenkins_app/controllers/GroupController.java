@@ -33,6 +33,9 @@ public class GroupController {
         } catch (DuplicateKeyException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("Group with the same name already exists");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred while processing the request");
         }
     }
     
