@@ -32,14 +32,16 @@ public class GroupController {
         return groupservice.getAllGroups();
     }
 
-    @GetMapping("/{id}")
-    public Group getgroupById(@PathVariable int id) {
-        return groupservice.getGroupById(id);
+    @GetMapping("/getByName/{groupName}")
+    public Group getGroupByGroupName(@PathVariable Group.GroupName groupName) {
+        return groupservice.getGroupByGroupName(groupName);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletegroup(@PathVariable int id) {
-        groupservice.deleteGroup(id);
+    
+
+    @DeleteMapping("/deleteByGroupName/{groupName}")
+    public void deleteGroupByGroupName(@PathVariable Group.GroupName groupName) {
+        groupservice.deleteByGroupName(groupName);
     }
     
 }

@@ -8,13 +8,11 @@ public interface IGroupService {
 
     Group addGroup(Group user);
 
-    Group getGroupById(int id);
-
     List<Group> getAllGroups();
 
     Group updateGroup(Group group);
 
-    void deleteGroup(int id);
-
+    public void deleteByGroupName(Group.GroupName groupName) ;
+    public Group getGroupByGroupName(Group.GroupName groupName);
 }
       

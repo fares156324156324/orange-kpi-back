@@ -9,19 +9,14 @@ import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 
 @Service
-
 public class GroupService implements IGroupService {
+
     @Autowired
     private GroupRepository groupRepository;
 
     @Override
     public Group addGroup(Group group) {
         return groupRepository.save(group);
-    }
-
-    @Override
-    public Group getGroupById(int id) {
-        return groupRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -32,16 +27,16 @@ public class GroupService implements IGroupService {
     @Override
     public Group updateGroup(Group group) {
         return groupRepository.save(group);
+    }
 
+
+    @Override
+    public void deleteByGroupName(Group.GroupName groupName) {
+        groupRepository.deleteByGroupname(groupName);
     }
 
     @Override
-    public void deleteGroup(int id) {
-        groupRepository.deleteById(id);
-
+    public Group getGroupByGroupName(Group.GroupName groupName) {
+        return groupRepository.findByGroupname(groupName);
     }
-
-
-
-    
 }
