@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.services.IGroupService;
+import com.mongodb.DuplicateKeyException;
 
 @RestController
 @RequestMapping("/group")
@@ -28,8 +29,8 @@ public class GroupController {
         try {
             Group createdGroup = groupservice.addGroup(group);
             return ResponseEntity.ok(createdGroup);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (DuplicateKeyException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Group already exists");
         }
     }
     @GetMapping("/getAll")
