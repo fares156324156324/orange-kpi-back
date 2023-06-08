@@ -37,14 +37,15 @@ public class UserController {
             // Handle invalid group name
             throw new IllegalArgumentException("Invalid group name");
         }
+        user.setGroup(group);
+        User res = userService.addUser(user);
         List<User> users = new ArrayList<>(group.getUsers()); // Create a mutable copy of the list
-        users.add(user);
+        users.add(res);
         group.setUsers(users);
     
         groupRepository.save(group);
         
-        user.setGroup(group);
-        return userService.addUser(user);
+        return res;
     }
     
 
