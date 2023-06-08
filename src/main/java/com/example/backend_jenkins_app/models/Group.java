@@ -43,6 +43,6 @@ public class Group {
     @Indexed(unique = true)
     private GroupName groupname;
 
-    @DBRef
+    @DBRef(lazy = false)
     private List<User> users;
 }
