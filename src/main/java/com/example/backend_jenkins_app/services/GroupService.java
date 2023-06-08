@@ -45,12 +45,18 @@ public class GroupService implements IGroupService {
     public Group getGroupByGroupName(Group.GroupName groupName) {
         return groupRepository.findByGroupname(groupName);
     }
-     public List<User> getUsersByGroupName(Group.GroupName groupName) {
+
+    public List<User> getUsersByGroupName(Group.GroupName groupName) {
         Group group = groupRepository.findByGroupname(groupName);
         if (group == null) {
             throw new IllegalArgumentException("Invalid group name");
         }
         
-        return group.getUsers();
+        List<User> users = group.getUsers();
+        if (users == null) {
+            throw new IllegalStateException("No users found for the group");
+        }
+
+        return users;
     }
 }

@@ -38,11 +38,16 @@ public class GroupController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Group with the same name already exists");
         }
-    } 
+    }
+    
+    
+
     @GetMapping("/getAll")
     public List<Group> getAllgroups() {
         return groupservice.getAllGroups();
     }
+
+
 
     @GetMapping("/getByName/{groupName}")
     public Group getGroupByGroupName(@PathVariable Group.GroupName groupName) {
@@ -55,6 +60,9 @@ public class GroupController {
     public void deleteGroupByGroupName(@PathVariable Group.GroupName groupName) {
         groupservice.deleteByGroupName(groupName);
     }
+
+
+
     @GetMapping("/{groupName}/users")
     public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable Group.GroupName groupName) {
         Group group = groupservice.getGroupByGroupName(groupName);
