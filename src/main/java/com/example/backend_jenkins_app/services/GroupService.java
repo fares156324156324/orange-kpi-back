@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.backend_jenkins_app.models.Group;
+import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 import com.mongodb.DuplicateKeyException;
 
@@ -43,5 +44,13 @@ public class GroupService implements IGroupService {
     @Override
     public Group getGroupByGroupName(Group.GroupName groupName) {
         return groupRepository.findByGroupname(groupName);
+    }
+     public List<User> getUsersByGroupName(Group.GroupName groupName) {
+        Group group = groupRepository.findByGroupname(groupName);
+        if (group == null) {
+            throw new IllegalArgumentException("Invalid group name");
+        }
+        
+        return group.getUsers();
     }
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_jenkins_app.models.Group;
+import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.services.IGroupService;
 import com.mongodb.DuplicateKeyException;
 
@@ -54,5 +55,13 @@ public class GroupController {
     public void deleteGroupByGroupName(@PathVariable Group.GroupName groupName) {
         groupservice.deleteByGroupName(groupName);
     }
-    
+    @GetMapping("/{groupName}/users")
+    public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable Group.GroupName groupName) {
+        Group group = groupservice.getGroupByGroupName(groupName);
+        if (group == null) {
+            return ResponseEntity.notFound().build();
+        }
+        List<User> users = group.getUsers();
+        return ResponseEntity.ok(users);
+    }
 }
