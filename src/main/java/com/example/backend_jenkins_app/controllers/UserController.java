@@ -36,6 +36,11 @@ public User createUser(@RequestBody User user) {
         // Handle invalid group name
         throw new IllegalArgumentException("Invalid group name");
     }
+    List<User> users = group.getUsers();
+    users.add(user);
+    group.setUsers(users);
+
+    groupRepository.save(group);
     
     user.setGroup(group);
     return userService.addUser(user);
