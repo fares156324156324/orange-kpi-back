@@ -2,6 +2,8 @@ package com.example.backend_jenkins_app.models;
 
 import java.util.List;
 
+import javax.persistence.OneToMany;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -44,5 +46,7 @@ public class Group {
 
     @JsonIgnore
     @ToString.Exclude
+    @OneToMany(mappedBy = "group")
     private List<User> users;
+    
 }
