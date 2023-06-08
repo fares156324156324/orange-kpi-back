@@ -1,5 +1,6 @@
 package com.example.backend_jenkins_app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,21 +31,22 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-public User createUser(@RequestBody User user) {
-    Group group = groupRepository.findByGroupname(user.getGroup().getGroupname());
-    if (group == null) {
-        // Handle invalid group name
-        throw new IllegalArgumentException("Invalid group name");
-    }
-    List<User> users = group.getUsers();
-    users.add(user);
-    group.setUsers(users);
-
-    groupRepository.save(group);
+    public User createUser(@RequestBody User user) {
+        Group group = groupRepository.findByGroupname(user.getGroup().getGroupname());
+        if (group == null) {
+            // Handle invalid group name
+            throw new IllegalArgumentException("Invalid group name");
+        }
+        List<User> users = new ArrayList<>(group.getUsers()); // Create a mutable copy of the list
+        users.add(user);
+        group.setUsers(users);
     
-    user.setGroup(group);
-    return userService.addUser(user);
-}
+        groupRepository.save(group);
+        
+        user.setGroup(group);
+        return userService.addUser(user);
+    }
+    
 
 
     @GetMapping("/{id}")
