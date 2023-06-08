@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.services.IGroupService;
-import com.mongodb.DuplicateKeyException;
 
 @RestController
 @RequestMapping("/group")

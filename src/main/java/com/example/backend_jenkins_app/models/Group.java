@@ -2,8 +2,6 @@ package com.example.backend_jenkins_app.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -45,5 +43,5 @@ public class Group {
     private GroupName groupname;
     
     @DBRef
-    private List<User> users;
+    private List<User> users = List.of();
 }
