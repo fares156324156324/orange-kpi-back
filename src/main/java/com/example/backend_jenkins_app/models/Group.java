@@ -2,12 +2,13 @@ package com.example.backend_jenkins_app.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToMany;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -43,6 +44,6 @@ public class Group {
     @Indexed(unique = true)
     private GroupName groupname;
 
-    @DBRef(lazy = false)
+    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
     private List<User> users;
 }
