@@ -43,7 +43,7 @@ public class Group {
 
     @Indexed(unique = true)
     private GroupName groupname;
-
-    @OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
+    
+    @DBRef
     private List<User> users;
 }

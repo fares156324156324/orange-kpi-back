@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +35,6 @@ public class User {
     @Enumerated(EnumType.STRING)
     private String role;
 
-    @ManyToOne
+    @DBRef
     private Group group;
 }
