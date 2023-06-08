@@ -22,7 +22,11 @@ public class UserController {
     
     @Autowired
     private GroupRepository groupRepository;
+    @Autowired
+
     private IGroupService groupService;
+    @Autowired
+
     private IUserService userService;
 
     @PostMapping
