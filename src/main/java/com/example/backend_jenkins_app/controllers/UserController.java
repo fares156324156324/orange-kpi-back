@@ -10,20 +10,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
+import com.example.backend_jenkins_app.repositories.GroupRepository;
+import com.example.backend_jenkins_app.services.IGroupService;
 import com.example.backend_jenkins_app.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    
     @Autowired
-
+    private GroupRepository groupRepository;
+    private IGroupService groupService;
     private IUserService userService;
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.addUser(user);
+public User createUser(@RequestBody User user) {
+    Group group = groupRepository.findByGroupname(user.getGroup().getGroupname());
+    if (group == null) {
+        // Handle invalid group name
+        throw new IllegalArgumentException("Invalid group name");
     }
+    
+    user.setGroup(group);
+    return userService.addUser(user);
+}
+
 
     @GetMapping("/{id}")
     public User getUserById(@PathVariable int id) {
