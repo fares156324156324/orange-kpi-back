@@ -7,13 +7,17 @@ import com.example.backend_jenkins_app.models.User;
 
 public interface IGroupService {
 
-    Group addGroup(Group user);
+    Group addGroup(Group group);
 
     List<Group> getAllGroups();
 
     Group updateGroup(Group group);
-    public List<User> getUsersByGroupName(Group.GroupName groupName) ;
-            public void deleteByGroupName(Group.GroupName groupName) ;
-    public Group getGroupByGroupName(Group.GroupName groupName);
+
+    List<User> getUsersByGroupName(Group.GroupName groupName);
+
+    void deleteByGroupName(Group.GroupName groupName);
+
+    Group getGroupByGroupName(Group.GroupName groupName);
 }
+
       

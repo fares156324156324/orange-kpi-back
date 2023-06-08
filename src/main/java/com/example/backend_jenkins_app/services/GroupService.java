@@ -24,6 +24,7 @@ public class GroupService implements IGroupService {
             throw new IllegalArgumentException("Group already exists");
         }
     }
+    
 
     @Override
     public List<Group> getAllGroups() {
@@ -47,19 +48,21 @@ public class GroupService implements IGroupService {
     }
 
 
-    
-    public List<User> getUsersByGroupName(Group.GroupName groupName) {
-        Group group = groupRepository.findByGroupname(groupName);
-        if (group == null) {
-            throw new IllegalArgumentException("Invalid group name");
-        }
-        
-        List<User> users = group.getUsers();
-        if (users == null) {
-            throw new IllegalStateException("No users found for the group");
-        }
 
-        return users;
+    @Override
+    public List<User> getUsersByGroupName(Group.GroupName groupName) {
+    Group group = groupRepository.findByGroupname(groupName);
+    if (group == null) {
+        throw new IllegalArgumentException("Invalid group name");
     }
+
+    List<User> users = group.getUsers();
+    if (users == null) {
+        throw new IllegalStateException("No users found for the group");
+    }
+
+    return users;
+}
+
 
 }
