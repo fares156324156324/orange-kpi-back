@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_jenkins_app.models.Group;
-import com.example.backend_jenkins_app.models.LoginRequest;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 import com.example.backend_jenkins_app.services.IGroupService;
