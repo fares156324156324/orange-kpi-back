@@ -43,7 +43,6 @@ public class UserController {
         users.add(res);
         group.setUsers(users);
     
-        groupRepository.save(group);
         
         return res;
     }
