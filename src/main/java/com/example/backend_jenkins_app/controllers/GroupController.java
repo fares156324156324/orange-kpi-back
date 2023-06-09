@@ -35,7 +35,7 @@ public class GroupController {
                     .body("Group with the same name already exists");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Group with the same name already exists");
+                    .body("Group with the same name already exists !");
         }
     }
     
