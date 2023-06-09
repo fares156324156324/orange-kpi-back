@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -42,6 +44,7 @@ public class Group {
     @Indexed(unique = true)
     private GroupName groupname;
     
+    @JsonBackReference
     @DBRef
     private List<User> users = List.of();
 }
