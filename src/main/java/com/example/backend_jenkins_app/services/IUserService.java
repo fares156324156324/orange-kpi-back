@@ -16,4 +16,6 @@ public interface IUserService {
 
     void deleteUser(int id);
     public User getUserByEmail(String email) ;
+    User authenticateUser(String email, String password);
+
 }
