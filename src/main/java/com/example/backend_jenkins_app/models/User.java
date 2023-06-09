@@ -18,6 +18,7 @@ import lombok.ToString;
 @ToString
 @Document(collection = "users")
 public class User {
+    
     @Id
     private String id;
 
