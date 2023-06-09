@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
+import com.example.backend_jenkins_app.models.Group.GroupName;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 import com.mongodb.DuplicateKeyException;
 
@@ -17,14 +18,14 @@ public class GroupService implements IGroupService {
     private GroupRepository groupRepository;
 
     public Group addGroup(Group group) {
-        try {
-            return groupRepository.save(group);
-        } catch (DuplicateKeyException e) {
-            // Handle the duplicate key exception
+        GroupName groupName = group.getGroupname();
+        Group existingGroup = groupRepository.findByGroupname(groupName);
+        if (existingGroup != null) {
             throw new IllegalArgumentException("Group already exists");
         }
+        return groupRepository.save(group);
     }
-    
+      
 
     @Override
     public List<Group> getAllGroups() {

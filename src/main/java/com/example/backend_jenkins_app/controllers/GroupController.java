@@ -23,7 +23,6 @@ public class GroupController {
     @Autowired
     private IGroupService groupservice;
 
-    
     @PostMapping
     public ResponseEntity<Object> createGroup(@RequestBody Group group) {
         try {
@@ -35,10 +34,10 @@ public class GroupController {
                     .body("Group with the same name already exists");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Group with the same name already exists !");
+                    .body("An error occurred while adding the group");
         }
     }
-    
+     
     
 
     @GetMapping("/getAll")

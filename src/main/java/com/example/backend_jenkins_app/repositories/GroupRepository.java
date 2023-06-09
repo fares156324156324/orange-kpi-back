@@ -9,4 +9,5 @@ public interface GroupRepository extends MongoRepository<Group, String> {
     void deleteByGroupname(Group.GroupName groupName);
     Group findByGroupname(Group.GroupName groupName);
 
+
 }
