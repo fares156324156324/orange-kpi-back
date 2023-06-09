@@ -62,12 +62,19 @@ public class GroupController {
 
 
     @GetMapping("/{groupName}/users")
-    public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable("groupName") Group.GroupName groupName) {
-        try {
-            List<User> users = groupservice.getUsersByGroupName(groupName);
-            return ResponseEntity.ok(users);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
+public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable("groupName") Group.GroupName groupName) {
+    try {
+        List<User> users = groupservice.getUsersByGroupName(groupName);
         
-    }}
+        // Set groupName for each user
+        for (User user : users) {
+            user.setGroupName(groupName.toString());
+        }
+        
+        return ResponseEntity.ok(users);
+    } catch (IllegalArgumentException e) {
+        return ResponseEntity.notFound().build();
+    }
+}
+
 }

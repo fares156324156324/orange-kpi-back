@@ -2,6 +2,7 @@ package com.example.backend_jenkins_app.models;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -34,4 +35,20 @@ public class User {
     @JsonBackReference
     @DBRef
     private Group group;
+
+    @Transient
+    private String groupName;
+
+    // Getter and setter for groupName field
+
+    public String getGroupName() {
+        if (group != null) {
+            return group.getGroupname().toString();
+        }
+        return null;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
 }
