@@ -116,20 +116,24 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
     }
 }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String email = user.getEmail();
-        String password = user.getPassword();
-
-        User authenticatedUser = userService.authenticateUser(email, password);
-        if (authenticatedUser != null) {
-            // User authentication successful
-            String token = jwtUtil.generateToken(email);
-            return ResponseEntity.ok(token);
-        } else {
-            // User authentication failed
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+@PostMapping("/login")
+public ResponseEntity<String> login(@RequestBody User user) {
+    String email = user.getEmail();
+    String password = user.getPassword();
+    
+    User authenticatedUser = userService.authenticateUser(email, password);
+    if (authenticatedUser != null) {
+        // User authentication successful
+        // Generate a JWT token
+        String token = jwtUtil.generateToken(email);
+        
+        // Return the JWT token in the response body
+        return ResponseEntity.ok(token);
+    } else {
+        // User authentication failed
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    }
+}
 
 }
 
