@@ -14,9 +14,11 @@ import com.example.backend_jenkins_app.repositories.UserRepository;
 @ComponentScan("com.example.backend_jenkins_app.services")
 @ComponentScan("com.example.backend_jenkins_app.controllers")
 @ComponentScan("com.example.backend_jenkins_app.repositories")
+@ComponentScan(basePackages = "com.example.backend_jenkins_app")
 
 @SpringBootApplication(exclude = { DataSourceAutoConfiguration.class, SecurityAutoConfiguration.class })
 @EnableMongoRepositories(basePackageClasses = { UserRepository.class, GroupRepository.class })
+
 
 public class Application {
 
