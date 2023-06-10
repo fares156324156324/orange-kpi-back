@@ -116,7 +116,7 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
     }
 }
 
-@PostMapping("/login")
+   @PostMapping("/login")
 public ResponseEntity<String> login(@RequestBody User user) {
     String email = user.getEmail();
     String password = user.getPassword();
@@ -133,8 +133,6 @@ public ResponseEntity<String> login(@RequestBody User user) {
         // User authentication failed
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
-}
-
 }
 
 
