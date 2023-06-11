@@ -40,13 +40,13 @@ public class LoginController {
     if (authenticatedUser != null) {
         // User authentication successful
         // Generate a JWT token
-        String token = jwtUtil.generateToken(email);
+        //String token = jwtUtil.generateToken(email);
         
         // Return the JWT token in the response body
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok("");
     } else {
         // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials" + email + ' '+ password);
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials" + email + ' ' + password);
     }
 }
 
