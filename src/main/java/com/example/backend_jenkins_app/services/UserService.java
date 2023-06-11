@@ -43,7 +43,7 @@ public class UserService implements IUserService {
     }
     @Override
     public User authenticateUser(String email, String password) {
-        return userRepository.findByEmailAndPassword(email, password);
+        return userRepository.findByEmail(email);
     }
     
 }
