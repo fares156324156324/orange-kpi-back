@@ -46,7 +46,7 @@ public class LoginController {
         return ResponseEntity.ok(token);
     } else {
         // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials" + email + ' '+ password);
     }
 }
 
