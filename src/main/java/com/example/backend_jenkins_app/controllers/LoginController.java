@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.backend_jenkins_app.Security.JWTUtil;
 import com.example.backend_jenkins_app.models.User;
@@ -13,7 +14,7 @@ import com.example.backend_jenkins_app.services.IGroupService;
 import com.example.backend_jenkins_app.services.IUserService;
 
 
-
+@RestController
 @RequestMapping("/login")
 
 public class LoginController {
@@ -30,12 +31,8 @@ public class LoginController {
 
     private IUserService userService;
 
-    
-
-
-    
-    
-public ResponseEntity<String> login(@RequestBody User user) {
+    @PostMapping
+    public ResponseEntity<String> login(@RequestBody User user) {
     String email = user.getEmail();
     String password = user.getPassword();
     
