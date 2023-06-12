@@ -39,7 +39,7 @@ public class UserController {
     private IUserService userService;
 
     @PostMapping
-public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
     try {
         String email = user.getEmail();
         User existingUser = userService.getUserByEmail(email);
@@ -91,7 +91,7 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
 
 
     @PutMapping("/{email}/group/{groupName}")
-public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
+     public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
     try {
         User user = userService.getUserByEmail(email);
         if (user == null) {
@@ -116,24 +116,20 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
     }
 }
 
-   @PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody User user) {
-    String email = user.getEmail();
-    String password = user.getPassword();
-    
-    User authenticatedUser = userService.authenticateUser(email, password);
-    if (authenticatedUser != null) {
-        // User authentication successful
-        // Generate a JWT token
-        String token = jwtUtil.generateToken(email);
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
         
-        // Return the JWT token in the response body
-        return ResponseEntity.ok(token);
-    } else {
-        // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        User authenticatedUser = userService.authenticateUser(email, password);
+        if (authenticatedUser != null) {
+            // User authentication successful
+            // Return a response or generate a token for further authentication
+            return ResponseEntity.ok("User authenticated successfully");
+        } else {
+            // User authentication failed
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
-}
-
 
 }

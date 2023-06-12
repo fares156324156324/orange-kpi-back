@@ -15,7 +15,9 @@ public interface IUserService {
     User updateUser(User user);
 
     void deleteUser(int id);
+
     public User getUserByEmail(String email) ;
+    
     User authenticateUser(String email, String password);
 
 }

@@ -47,10 +47,11 @@ public class UserService implements IUserService {
     public User getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+
     @Override
-public User authenticateUser(String email, String password) {
+    public User authenticateUser(String email, String password) {
     logger.info("Authenticating user: {}", email);
-    
     User user = userRepository.findByEmailAndPassword(email, password);
     logger.info("Retrieved user: {}", user);
     
