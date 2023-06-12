@@ -116,20 +116,21 @@ public class UserController {
     }
 }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String email = user.getEmail();
-        String password = user.getPassword();
-        
-        User authenticatedUser = userService.authenticateUser(email, password);
-        if (authenticatedUser != null) {
-            // User authentication successful
-            // Return a response or generate a token for further authentication
-            return ResponseEntity.ok("User authenticated successfully");
-        } else {
-            // User authentication failed
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+@PostMapping("/login")
+public ResponseEntity<String> login(@RequestBody User user) {
+    String email = user.getEmail();
+    String password = user.getPassword();
+    
+    User authenticatedUser = userService.authenticateUser(email, password);
+    if (authenticatedUser != null) {
+        // User authentication successful
+        // Return a response or generate a token for further authentication
+        return ResponseEntity.ok("User authenticated successfully");
+    } else {
+        // User authentication failed
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+}
+
 
 }

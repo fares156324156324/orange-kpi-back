@@ -51,12 +51,9 @@ public class UserService implements IUserService {
 
     @Override
     public User authenticateUser(String email, String password) {
-    logger.info("Authenticating user: {}", email);
-    User user = userRepository.findByEmailAndPassword(email, password);
-    logger.info("Retrieved user: {}", user);
-    
-    return user;
-}
+        return userRepository.findByEmailAndPassword(email, password);
+    }
+
 
     
 }
