@@ -21,15 +21,19 @@ public class JWTUtil {
     public String generateToken(String email) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + expiration);
-
-        return Jwts.builder()
+    
+        String token = Jwts.builder()
                 .setSubject(email)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
+    
+        System.out.println("Generated Token: " + token); // Print the generated token to the console
+    
+        return token;
     }
-
+    
     public boolean validateToken(String token, String email) {
         String username = extractUsername(token);
         return (username.equals(email) && !isTokenExpired(token));

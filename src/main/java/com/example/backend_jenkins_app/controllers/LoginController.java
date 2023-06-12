@@ -38,7 +38,7 @@ public class LoginController {
     
 
 
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<String> login(@RequestBody User user) {
         String email = user.getEmail();
         String password = user.getPassword();
