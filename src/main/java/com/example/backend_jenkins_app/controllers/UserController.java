@@ -129,7 +129,7 @@ public ResponseEntity<String> login(@RequestBody User user) {
     String password = user.getPassword();
     
     logger.info("Received login request for email: {}", email);
-    logger.debug("Received login request with password: {}", password);
+    logger.info("Received login request with password: {}", password);
     
     User authenticatedUser = userService.authenticateUser(email, password);
     if (authenticatedUser != null) {
