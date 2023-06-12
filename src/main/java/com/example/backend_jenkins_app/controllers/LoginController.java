@@ -37,28 +37,29 @@ public class LoginController {
 
     
 
-    @PostMapping
 
+    @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody User user) {
-    String email = user.getEmail();
-    String password = user.getPassword();
-    
-    User authenticatedUser = userService.authenticateUser(email, password);
-    logger.info("Authenticated User: {}", authenticatedUser); // Log the authenticatedUser
-
-    if (authenticatedUser != null) {
-        // User authentication successful
-        // Generate a JWT token
-        String token = jwtUtil.generateToken(email);
+        String email = user.getEmail();
+        String password = user.getPassword();
         
-        // Return the JWT token in the response body
-        return ResponseEntity.ok(token);
-    } else {
-        // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        logger.info("Login request received for email: {}", email); // Log the email
+        
+        User authenticatedUser = userService.authenticateUser(email, password);
+        logger.info("Authenticated User: {}", authenticatedUser); // Log the authenticatedUser
+        
+        if (authenticatedUser != null) {
+            // User authentication successful
+            // Generate a JWT token
+            String token = jwtUtil.generateToken(email);
+            
+            // Return the JWT token in the response body
+            return ResponseEntity.ok(token);
+        } else {
+            // User authentication failed
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
     
-}
-
 
 }
