@@ -132,13 +132,22 @@ public ResponseEntity<String> login(@RequestBody User user) {
     logger.info("Received login request with password: {}", password);
     
     User authenticatedUser = userService.authenticateUser(email, password);
+    
     if (authenticatedUser != null) {
         return ResponseEntity.ok("User authenticated successfully");
-    } else {
+    
+    }
+     else {
+        logger.info("Resulting user: {}", authenticatedUser);
+
         // User authentication failed
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
+        
+    
+    
     }
-}
+    
 
 
 }
