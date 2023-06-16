@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend_jenkins_app.Security.JWTUtil;
+import com.example.backend_jenkins_app.Security.JwtTokenUtil;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
@@ -31,7 +31,7 @@ public class UserController {
     
 
     @Autowired
-    private JWTUtil jwtUtil;
+    private JwtTokenUtil jwtUtil;
 
     @Autowired
     private GroupRepository groupRepository;
@@ -138,6 +138,8 @@ public ResponseEntity<String> login(@RequestBody User user) {
     
     }
      else {
+        logger.info("Authentication failed for email: {}", email);
+
         logger.info("Resulting user: {}", authenticatedUser);
 
         // User authentication failed

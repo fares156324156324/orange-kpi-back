@@ -35,8 +35,12 @@ public class Group {
         DRS,
         ARCHITECTURE_DIMENSIONNEMNT,
         UAS,
-        INJ
+        INJ,
+        Radio
     }
+
+    
+
 
     @Id
     private String id;
