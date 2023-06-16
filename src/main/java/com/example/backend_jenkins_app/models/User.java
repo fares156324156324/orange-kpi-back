@@ -51,4 +51,9 @@ public class User {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

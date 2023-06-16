@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.backend_jenkins_app.Security.JwtTokenUtil;
+import com.example.backend_jenkins_app.Security.JwtGeneratorInterface;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
@@ -31,8 +32,8 @@ public class UserController {
     
 
     @Autowired
-    private JwtTokenUtil jwtUtil;
-
+    private JwtGeneratorInterface jwtGenerator;
+    
     @Autowired
     private GroupRepository groupRepository;
 
@@ -124,32 +125,18 @@ public class UserController {
 }
 
 @PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody User user) {
-    String email = user.getEmail();
-    String password = user.getPassword();
-    
-    logger.info("Received login request for email: {}", email);
-    logger.info("Received login request with password: {}", password);
-    
-    User authenticatedUser = userService.authenticateUser(email, password);
-    
-    if (authenticatedUser != null) {
-        return ResponseEntity.ok("User authenticated successfully");
-    
-    }
-     else {
-        logger.info("Authentication failed for email: {}", email);
-
-        logger.info("Resulting user: {}", authenticatedUser);
-
-        // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
-        
-    
-    
-    }
-    
-
-
+public ResponseEntity<?> loginUser(@RequestBody User user) {
+  try {
+    if(user.getEmail() == null || user.getPassword() == null) {
+    throw new UsernameNotFoundException("email or Password is Empty");
+  }
+  User userData = userService.getUserByNameAndPassword(user.getEmail(), user.getPassword());
+  if(userData == null){
+     throw new UsernameNotFoundException("email or Password is Invalid");
+  }
+     return new ResponseEntity<>(jwtGenerator.generateToken(user), HttpStatus.OK);
+  } catch (UsernameNotFoundException e) {
+     return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+  }
+}
 }

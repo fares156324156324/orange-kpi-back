@@ -3,6 +3,7 @@ package com.example.backend_jenkins_app.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.UserRepository;
@@ -52,8 +53,14 @@ public class UserService implements IUserService {
     public User authenticateUser(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
     }
-
-
+    @Override
+    public User getUserByNameAndPassword(String name, String password) throws UsernameNotFoundException {
+      User user = userRepository.findByEmailAndPassword(name, password);
+      if(user == null){
+         throw new UsernameNotFoundException("Invalid id and password");
+      }
+      return user;
+    }
+}
 
     
-}
