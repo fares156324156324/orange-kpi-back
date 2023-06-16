@@ -57,7 +57,7 @@ public class UserService implements IUserService {
     public User getUserByNameAndPassword(String name, String password) throws UsernameNotFoundException {
       User user = userRepository.findByEmailAndPassword(name, password);
       if(user == null){
-         throw new UsernameNotFoundException("Invalid id and password");
+         throw new UsernameNotFoundException("Invalid  email and password");
       }
       return user;
     }
