@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.example.backend_jenkins_app.Security.JwtGeneratorInterface;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
@@ -30,9 +28,6 @@ import org.slf4j.LoggerFactory;
 @RequestMapping("/users")
 public class UserController {
     
-
-    @Autowired
-    private JwtGeneratorInterface jwtGenerator;
     
     @Autowired
     private GroupRepository groupRepository;
@@ -124,19 +119,5 @@ public class UserController {
     }
 }
 
-@PostMapping("/login")
-public ResponseEntity<?> loginUser(@RequestBody User user) {
-  try {
-    if(user.getEmail() == null || user.getPassword() == null) {
-    throw new UsernameNotFoundException("email or Password is Empty");
-  }
-  User userData = userService.getUserByNameAndPassword(user.getEmail(), user.getPassword());
-  if(userData == null){
-     throw new UsernameNotFoundException("email or Password is Invalid");
-  }
-     return new ResponseEntity<>(jwtGenerator.generateToken(user), HttpStatus.OK);
-  } catch (UsernameNotFoundException e) {
-     return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
-  }
-}
+
 }

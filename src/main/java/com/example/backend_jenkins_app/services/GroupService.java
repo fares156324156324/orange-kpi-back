@@ -9,7 +9,6 @@ import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.models.Group.GroupName;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
-import com.mongodb.DuplicateKeyException;
 
 @Service
 public class GroupService implements IGroupService {
