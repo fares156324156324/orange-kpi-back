@@ -39,9 +39,6 @@ public class Group {
         Radio
     }
 
-    
-
-
     @Id
     private String id;
 

@@ -1,7 +1,5 @@
 package com.example.backend_jenkins_app.models;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Transient;
 
 import org.springframework.data.annotation.Id;
@@ -51,9 +49,5 @@ public class User {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-
-    public User(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
 }
+

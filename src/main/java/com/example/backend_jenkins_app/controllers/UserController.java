@@ -2,11 +2,9 @@ package com.example.backend_jenkins_app.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,34 +13,28 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 import com.example.backend_jenkins_app.services.IGroupService;
 import com.example.backend_jenkins_app.services.IUserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
     
-    
     @Autowired
     private GroupRepository groupRepository;
-
     @Autowired
+
     private IGroupService groupService;
-
     @Autowired
+
     private IUserService userService;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-
-
     @PostMapping
-    public ResponseEntity<String> createUser(@RequestBody User user) {
+public ResponseEntity<String> createUser(@RequestBody User user) {
     try {
         String email = user.getEmail();
         User existingUser = userService.getUserByEmail(email);
@@ -94,7 +86,7 @@ public class UserController {
 
 
     @PutMapping("/{email}/group/{groupName}")
-     public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
+public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
     try {
         User user = userService.getUserByEmail(email);
         if (user == null) {
@@ -116,6 +108,22 @@ public class UserController {
     } catch (Exception e) {
         // Other exceptions
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user group");
+    }
+}
+
+@PostMapping("/login")
+public ResponseEntity<String> login(@RequestBody User user) {
+    String email = user.getEmail();
+    String password = user.getPassword();
+    
+    User authenticatedUser = userService.authenticateUser(email, password);
+    if (authenticatedUser != null) {
+        // User authentication successful
+        // Return a response or generate a token for further authentication
+        return ResponseEntity.ok("User authenticated successfully");
+    } else {
+        // User authentication failed
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
 }
 

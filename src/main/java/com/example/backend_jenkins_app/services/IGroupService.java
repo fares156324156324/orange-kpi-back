@@ -20,4 +20,3 @@ public interface IGroupService {
     Group getGroupByGroupName(Group.GroupName groupName);
 }
 
-      
