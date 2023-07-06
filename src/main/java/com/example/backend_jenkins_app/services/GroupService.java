@@ -9,7 +9,6 @@ import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.models.Group.GroupName;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
-import com.mongodb.DuplicateKeyException;
 
 @Service
 public class GroupService implements IGroupService {
@@ -59,7 +58,7 @@ public class GroupService implements IGroupService {
 
     List<User> users = group.getUsers();
     if (users == null) {
-        throw new IllegalStateException("No users found for the group");
+        throw new IllegalStateException("No user found for the group");
     }
 
     return users;

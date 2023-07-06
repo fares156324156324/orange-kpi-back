@@ -2,7 +2,6 @@ package com.example.backend_jenkins_app.services;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.UserRepository;
