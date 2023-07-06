@@ -30,11 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Configure your authentication provider, e.g., in-memory or database-based authentication
-        // You can also use custom UserDetailsService or LDAP authentication
-        // Example:
         auth.inMemoryAuthentication()
-            .withUser("admin").password(passwordEncoder().encode("admin123")).roles("ADMIN");
+            .withUser("admin").password(passwordEncoder().encode("admin123")).roles("USER");
     }
     
     @Bean
