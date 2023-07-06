@@ -47,8 +47,6 @@ public class GroupService implements IGroupService {
         return groupRepository.findByGroupname(groupName);
     }
 
-
-
     @Override
     public List<User> getUsersByGroupName(Group.GroupName groupName) {
     Group group = groupRepository.findByGroupname(groupName);

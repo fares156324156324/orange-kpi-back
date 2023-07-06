@@ -27,10 +27,6 @@ public class UserController {
     @Autowired
     private GroupRepository groupRepository;
     @Autowired
-
-    private IGroupService groupService;
-    @Autowired
-
     private IUserService userService;
 
     @PostMapping
@@ -111,21 +107,22 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
     }
 }
 
+
 @PostMapping("/login")
-public ResponseEntity<String> login(@RequestBody User user) {
-    String email = user.getEmail();
-    String password = user.getPassword();
-    
-    User authenticatedUser = userService.authenticateUser(email, password);
-    if (authenticatedUser != null) {
-        // User authentication successful
-        // Return a response or generate a token for further authentication
-        return ResponseEntity.ok("User authenticated successfully");
-    } else {
-        // User authentication failed
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+    public ResponseEntity<String> login(@RequestBody User user) {
+        String email = user.getEmail();
+        String password = user.getPassword();
+
+        User authenticatedUser = userService.authenticateUser(email, password);
+        if (authenticatedUser != null) {
+            // User authentication successful
+            // Generate a JWT token for the user
+            String token = userService.generateJwtToken(authenticatedUser);
+            return ResponseEntity.ok(token);
+        } else {
+            // User authentication failed
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
 }
 
-
-}

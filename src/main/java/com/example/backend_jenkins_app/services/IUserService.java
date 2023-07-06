@@ -13,6 +13,7 @@ public interface IUserService {
     List<User> getAllUsers();
 
     User updateUser(User user);
+    String generateJwtToken(User user) ;
 
     void deleteUser(int id);
     public User getUserByEmail(String email) ;
