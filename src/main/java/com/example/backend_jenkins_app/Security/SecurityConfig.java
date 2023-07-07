@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -15,20 +16,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-        @Override
+     
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http
+            .csrf().disable()
             .authorizeRequests()
                 .antMatchers("/users/login").permitAll()
-                .antMatchers("/users/getAll").authenticated() 
+                .antMatchers("/users/getAll").authenticated()
                 .anyRequest().authenticated()
-            .and()
+                .and()
             .sessionManagement()
-                .sessionFixation().migrateSession()
-                .maximumSessions(1)
-                    .maxSessionsPreventsLogin(true)
-                    .expiredUrl("/session-expired")
-            .and()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Set session creation policy to IF_REQUIRED
+                .maximumSessions(1) // Allow only one session per user
+                    .maxSessionsPreventsLogin(true) // Prevent concurrent sessions
+                    .expiredUrl("/login") // Redirect URL when session expires
+                .and()
             .and()
             .httpBasic();
     }
