@@ -1,13 +1,9 @@
 package com.example.backend_jenkins_app.services;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.example.backend_jenkins_app.models.User;
@@ -18,7 +14,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 
-public class UserService implements IUserService ,UserDetailsService{
+public class UserService implements IUserService {
     @Autowired
     private UserRepository userRepository;
 
@@ -29,13 +25,10 @@ public class UserService implements IUserService ,UserDetailsService{
     @Value("${jwt.expiration}")
     private long jwtExpiration;
 
-    private final PasswordEncoder passwordEncoder;
-
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private PasswordEncoder passwordEncoder;
+
+
     public String generateJwtToken(User user) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + jwtExpiration);
@@ -79,15 +72,6 @@ public class UserService implements IUserService ,UserDetailsService{
     @Override
     public User authenticateUser(String email, String password) {
         return userRepository.findByEmailAndPassword(email, password);
-    }
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with email: " + email);
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                new ArrayList<>());
     }
 
 }

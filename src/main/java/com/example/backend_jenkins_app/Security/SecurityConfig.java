@@ -1,6 +1,5 @@
 package com.example.backend_jenkins_app.Security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,58 +11,44 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import com.example.backend_jenkins_app.services.UserService;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final UserService userService;
-    private final JwtUtil jwtUtil;
-
-    public SecurityConfig(UserService userService, JwtUtil jwtUtil) {
-        this.userService = userService;
-        this.jwtUtil = jwtUtil;
-    }
+     
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
+        http
+            .csrf().disable()
+            .authorizeRequests()
                 .antMatchers("/users/login").permitAll()
                 .antMatchers("/users/getAll").authenticated()
                 .anyRequest().authenticated()
                 .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .maximumSessions(1)
-                .maxSessionsPreventsLogin(true)
-                .expiredUrl("/login")
+            .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Set session creation policy to IF_REQUIRED
+                .maximumSessions(1) // Allow only one session per user
+                    .maxSessionsPreventsLogin(true) // Prevent concurrent sessions
+                    .expiredUrl("/login") // Redirect URL when session expires
                 .and()
-                .and()
-                .httpBasic();
-
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+            .and()
+            .httpBasic();
     }
 
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.inMemoryAuthentication()
+            .withUser("admin").password(passwordEncoder().encode("admin123")).roles("USER");
     }
-
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-        return new JwtAuthenticationFilter(jwtUtil, userService, authenticationManagerBean());
-    }
-
+    
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
