@@ -29,10 +29,13 @@ public class UserService implements IUserService ,UserDetailsService{
     @Value("${jwt.expiration}")
     private long jwtExpiration;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
     public String generateJwtToken(User user) {
         Date now = new Date();
         Date expiration = new Date(now.getTime() + jwtExpiration);
