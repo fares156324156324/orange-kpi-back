@@ -15,18 +15,24 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    
-    @Override
+        @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .authorizeRequests()
                 .antMatchers("/users/login").permitAll()
                 .antMatchers("/users/getAll").authenticated() 
-                .antMatchers("/group/getAll").authenticated() 
                 .anyRequest().authenticated()
-                .and()
+            .and()
+            .sessionManagement()
+                .sessionFixation().migrateSession()
+                .maximumSessions(1)
+                    .maxSessionsPreventsLogin(true)
+                    .expiredUrl("/session-expired")
+            .and()
+            .and()
             .httpBasic();
     }
+
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
