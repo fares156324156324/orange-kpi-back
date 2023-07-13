@@ -75,7 +75,7 @@ public class Group {
                 KPI = "Unknown, 3G, TUNIS03.2_Gi";
                 break;
         }
-    }
+    }//
 
     @Id
     private String id;
