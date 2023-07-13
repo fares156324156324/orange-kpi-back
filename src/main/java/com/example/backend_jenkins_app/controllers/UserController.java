@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.backend_jenkins_app.Security.JwtUtil;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
@@ -23,7 +24,8 @@ import com.example.backend_jenkins_app.services.IUserService;
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    
+    @Autowired
+    private JwtUtil jwtUtil;
     @Autowired
     private GroupRepository groupRepository;
     @Autowired
@@ -61,6 +63,7 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to create user");
     }
 }
+
 
     
 
@@ -107,22 +110,22 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
     }
 }
 
-
 @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        String email = user.getEmail();
-        String password = user.getPassword();
+public ResponseEntity<String> login(@RequestBody User user) {
+    String email = user.getEmail();
+    String password = user.getPassword();
 
-        User authenticatedUser = userService.authenticateUser(email, password);
-        if (authenticatedUser != null) {
-            // User authentication successful
-            // Generate a JWT token for the user
-            String token = userService.generateJwtToken(authenticatedUser);
-            return ResponseEntity.ok(token);
-        } else {
-            // User authentication failed
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
-        }
+    User authenticatedUser = userService.authenticateUser(email, password);
+    if (authenticatedUser != null) {
+        // User authentication successful
+        // Generate a JWT token for the user
+        String token = jwtUtil.generateToken(email);
+        return ResponseEntity.ok(token);
+    } else {
+        // User authentication failed
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
     }
+}
+
 }
 
