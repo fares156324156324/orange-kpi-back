@@ -22,8 +22,10 @@ public class GroupService implements IGroupService {
         if (existingGroup != null) {
             throw new IllegalArgumentException("Group already exists");
         }
+        group.setKPIForGroupname(groupName); // Set the KPI value based on the groupname
         return groupRepository.save(group);
     }
+    
       
 
     @Override
