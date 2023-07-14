@@ -1,5 +1,6 @@
 package com.example.backend_jenkins_app.controllers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,12 @@ public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable("groupName")
         return ResponseEntity.notFound().build();
     }
 }
+@GetMapping("/groupnames")
+public ResponseEntity<List<Group.GroupName>> getAllGroupNames() {
+    List<Group.GroupName> groupNames = Arrays.asList(Group.GroupName.values());
+    return ResponseEntity.ok(groupNames);
+}
+
+
 
 }
