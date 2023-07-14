@@ -18,21 +18,27 @@ import com.example.backend_jenkins_app.Security.JwtUtil;
 import com.example.backend_jenkins_app.models.Group;
 import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
-import com.example.backend_jenkins_app.services.IGroupService;
 import com.example.backend_jenkins_app.services.IUserService;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+
     @Autowired
     private JwtUtil jwtUtil;
+
     @Autowired
     private GroupRepository groupRepository;
+
     @Autowired
     private IUserService userService;
 
+
+
+
     @PostMapping
-public ResponseEntity<String> createUser(@RequestBody User user) {
+    public ResponseEntity<String> createUser(@RequestBody User user) {
     try {
         String email = user.getEmail();
         User existingUser = userService.getUserByEmail(email);
@@ -72,16 +78,25 @@ public ResponseEntity<String> createUser(@RequestBody User user) {
         return userService.getUserById(id);
     }
 
+
+
     @GetMapping("/getAll")
 
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
 
+
+
+
+
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
     }
+
+
+
 
 
     @PutMapping("/{email}/group/{groupName}")
@@ -109,6 +124,9 @@ public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathV
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user group");
     }
 }
+
+
+
 
 @PostMapping("/login")
 public ResponseEntity<String> login(@RequestBody User user) {
