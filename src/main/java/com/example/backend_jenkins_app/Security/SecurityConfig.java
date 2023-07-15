@@ -19,20 +19,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private JwtTokenFilter jwtTokenFilter;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             .and()
             .authorizeRequests()
-                .antMatchers("/users/login").permitAll()
-                .anyRequest().authenticated()
-            .and()
-            .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class);
+                .antMatchers("/**").permitAll(); // Allow access to all endpoints without authentication
     }
+}
     
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
