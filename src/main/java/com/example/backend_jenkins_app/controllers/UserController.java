@@ -85,8 +85,34 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getAllUsers();
     }
+    
 
-
+    @PutMapping("/{email}")
+    public ResponseEntity<String> updateUserByEmail(@PathVariable String email, @RequestBody User updatedUser) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                throw new IllegalArgumentException("User not found");
+            }
+            
+            // Update the user details
+            user.setUserName(updatedUser.getUserName());
+            user.setEmail(updatedUser.getEmail());
+            user.setPassword(updatedUser.getPassword());
+            user.setRole(updatedUser.getRole());
+            
+            User savedUser = userService.updateUser(user);
+            
+            return ResponseEntity.status(HttpStatus.OK).body("User updated successfully");
+        } catch (IllegalArgumentException e) {
+            // User not found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        } catch (Exception e) {
+            // Other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user");
+        }
+    }
+    
 
 
     @DeleteMapping("/{id}")
