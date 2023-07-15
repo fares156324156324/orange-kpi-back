@@ -48,10 +48,12 @@ public class GroupController {
 
 
 
+    
     @GetMapping("/getByName/{groupName}")
     public Group getGroupByGroupName(@PathVariable Group.GroupName groupName) {
         return groupservice.getGroupByGroupName(groupName);
     }
+
 
     
 
@@ -59,6 +61,8 @@ public class GroupController {
     public void deleteGroupByGroupName(@PathVariable Group.GroupName groupName) {
         groupservice.deleteByGroupName(groupName);
     }
+
+
 
 
 
@@ -76,6 +80,9 @@ public ResponseEntity<List<User>> getUsersByGroupName(@PathVariable("groupName")
     } catch (IllegalArgumentException e) {
         return ResponseEntity.notFound().build();
     }
+
+
+
 }
 @GetMapping("/groupnames")
 public ResponseEntity<List<Group.GroupName>> getAllGroupNames() {

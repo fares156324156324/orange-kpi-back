@@ -89,7 +89,6 @@ public class UserController {
 
 
 
-
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
@@ -98,33 +97,35 @@ public class UserController {
 
 
 
-
     @PutMapping("/{email}/group/{groupName}")
-public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
-    try {
-        User user = userService.getUserByEmail(email);
-        if (user == null) {
-            throw new IllegalArgumentException("User not found");
+    public ResponseEntity<String> updateUserGroup(@PathVariable String email, @PathVariable String groupName) {
+        try {
+            User user = userService.getUserByEmail(email);
+            if (user == null) {
+                throw new IllegalArgumentException("User not found");
+            }
+            
+            Group group = groupRepository.findByGroupname(Group.GroupName.valueOf(groupName.toUpperCase()));
+            if (group == null) {
+                throw new IllegalArgumentException("Invalid group name");
+            }
+            
+            user.setGroup(group);
+            User updatedUser = userService.updateUser(user);
+            
+            // Save the updated user
+            userService.updateUser(updatedUser);
+            
+            return ResponseEntity.status(HttpStatus.OK).body("User group updated successfully");
+        } catch (IllegalArgumentException e) {
+            // User not found or invalid group name
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            // Other exceptions
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user group");
         }
-        
-        Group group = groupRepository.findByGroupname(Group.GroupName.valueOf(groupName.toUpperCase()));
-        if (group == null) {
-            throw new IllegalArgumentException("Invalid group name");
-        }
-        
-        user.setGroup(group);
-        User updatedUser = userService.updateUser(user);
-        
-        return ResponseEntity.status(HttpStatus.OK).body("User group updated successfully");
-    } catch (IllegalArgumentException e) {
-        // User not found or invalid group name
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    } catch (Exception e) {
-        // Other exceptions
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user group");
     }
-}
-
+    
 
 
 
