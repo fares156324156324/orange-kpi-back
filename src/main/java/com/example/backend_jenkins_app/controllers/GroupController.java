@@ -48,7 +48,7 @@ public class GroupController {
 
 
 
-    
+
     @GetMapping("/getByName/{groupName}")
     public Group getGroupByGroupName(@PathVariable Group.GroupName groupName) {
         return groupservice.getGroupByGroupName(groupName);
@@ -90,6 +90,25 @@ public ResponseEntity<List<Group.GroupName>> getAllGroupNames() {
     return ResponseEntity.ok(groupNames);
 }
 
+@GetMapping("/{groupName}/kpis")
+public ResponseEntity<List<String>> getGroupKPIs(@PathVariable("groupName") Group.GroupName groupName) {
+    try {
+        Group group = groupservice.getGroupByGroupName(groupName);
+        if (group == null) {
+            throw new IllegalArgumentException("Invalid group name");
+        }
+        
+        List<String> kpis = Arrays.asList(group.getKPI().split(", "));
+        
+        return ResponseEntity.ok(kpis);
+    } catch (IllegalArgumentException e) {
+        // Invalid group name
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+    } catch (Exception e) {
+        // Other exceptions
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+    }
+}
 
 
 }
