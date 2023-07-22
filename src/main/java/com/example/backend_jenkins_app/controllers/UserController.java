@@ -156,7 +156,7 @@ public class UserController {
     
 
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @PostMapping("/login")
 public ResponseEntity<String> login(@RequestBody User user) {
     String email = user.getEmail();
