@@ -19,7 +19,6 @@ import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.services.IGroupService;
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/group")
 public class GroupController {

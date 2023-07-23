@@ -21,7 +21,6 @@ import com.example.backend_jenkins_app.models.User;
 import com.example.backend_jenkins_app.repositories.GroupRepository;
 import com.example.backend_jenkins_app.services.IUserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -153,10 +152,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to update user group");
         }
     }
-    
+        
 
 
-@CrossOrigin(origins = "http://localhost:4200")
 @PostMapping("/login")
 public ResponseEntity<String> login(@RequestBody User user) {
     String email = user.getEmail();
